@@ -10,12 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('incomes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // Ex: Carteira, Banco, Cartão de Crédito
-            $table->string('type'); // Ex: 'wallet', 'bank', 'investment', 'credit_card'
-            $table->decimal('balance', 10, 2)->default(0);
+            $table->foreignId('account_id')->constrained()->onDelete('cascade');
+            $table->string('description');
+            $table->decimal('amount', 10, 2);
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('incomes');
     }
 };
