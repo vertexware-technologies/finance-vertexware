@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Expense>
- */
 class ExpenseFactory extends Factory
 {
     /**
@@ -17,10 +16,11 @@ class ExpenseFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(), // Relacionamento com User
+            'account_id' => Account::factory(), // Relacionamento com Account
             'description' => $this->faker->sentence,
             'amount' => $this->faker->randomFloat(2, 1, 500), // Valor aleatório entre 1 e 500
             'date' => $this->faker->date(),
-            'account_id' => \App\Models\Account::factory(), // Cria uma conta associada
         ];
     }
 }

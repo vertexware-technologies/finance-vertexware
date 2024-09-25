@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('account_id')->constrained()->onDelete('cascade');
             $table->string('description');
-            $table->enum('type', ['revenue', 'expense']); // receita ou despesa
+            $table->char('type', 2); // Altera para char(2)
             $table->decimal('amount', 10, 2);
             $table->date('date');
             $table->timestamps();

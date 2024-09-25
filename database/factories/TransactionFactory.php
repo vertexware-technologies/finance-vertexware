@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
- */
 class TransactionFactory extends Factory
 {
     /**
@@ -17,11 +16,12 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => $this->faker->randomElement(['income', 'expense']),
-            'amount' => $this->faker->randomFloat(2, 1, 1000), // Valor aleatório entre 1 e 1000
-            'description' => $this->faker->sentence,
-            'account_id' => \App\Models\Account::factory(), // Cria uma conta associada
+            'user_id' => User::factory(), // Relacionamento com User
+            'account_id' => Account::factory(), // Relacionamento com Account
+            'description' => $this->faker->sentence(),
+            'amount' => $this->faker->randomFloat(2, 10, 1000), // Valor da transação
             'date' => $this->faker->date(),
+            'type' => $this->faker->randomElement(['RE', 'DE']), // Tipos de transação como char(2)
         ];
     }
 }
