@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IncomeRequest;
 use App\Http\Resources\IncomeResource;
-use App\Models\Incomes;
+use App\Models\Income;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
@@ -14,7 +14,7 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        return IncomeResource::collection(Incomes::all());
+        return IncomeResource::collection(Income::all());
     }
 
     /**
@@ -30,14 +30,14 @@ class IncomeController extends Controller
      */
     public function store(IncomeRequest $request)
     {
-        $income = Incomes::create($request->validated());
+        $income = Income::create($request->validated());
         return new IncomeResource($income);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Incomes $income)
+    public function show(Income $income)
     {
         return new IncomeResource($income);
     }
@@ -53,7 +53,7 @@ class IncomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(IncomeRequest $request, Incomes $income)
+    public function update(IncomeRequest $request, Income $income)
     {
         $income->update($request->validated());
         return new IncomeResource($income);
@@ -62,7 +62,7 @@ class IncomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Incomes $income)
+    public function destroy(Income $income)
     {
         $income->delete();
         return response()->json(null, 204);

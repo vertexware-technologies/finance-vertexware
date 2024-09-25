@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function incomes()
     {
-        return $this->hasMany(Incomes::class);
+        return $this->hasMany(Income::class);
     }
 
     public function transactions()
