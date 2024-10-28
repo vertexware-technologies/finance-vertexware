@@ -16,14 +16,11 @@ class TransactionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'account_id' => $this->account_id,
             'description' => $this->description,
-            'type' => $this->type,
             'amount' => $this->amount,
             'date' => $this->date,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'category' => new CategoryResource($this->category),
+            'account_type' => new AccountTypeResource($this->accountType),
         ];
     }
 }

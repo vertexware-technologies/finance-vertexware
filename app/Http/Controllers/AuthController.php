@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -11,14 +12,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return UserResource::collection(User::all());
     }
-
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -30,40 +27,9 @@ class AuthController extends Controller
         $token = $user->createToken('auth-token')->plainTextToken;
         $user->token = $token;
 
-        $user->addRole(3); // add Participante Role
-
         $resource = new UserResource($user);
         return $resource->response()->setStatusCode(201);
     }
-
-    public function addRole(string $id, Request $request)
-    {
-        $data = $request->validate([
-            'role_id' => 'required|exists:roles,id',
-        ]);
-
-        $user = User::find($id);
-        if ($user) {
-            $user->addRole($data['role_id']);
-            return new UserResource($user);
-        }
-        return response(['error' => 'Usuário não encontrado.'], 404);
-    }
-
-    public function removeRole(string $id, Request $request)
-    {
-        $data = $request->validate([
-            'role_id' => 'required|exists:roles,id',
-        ]);
-
-        $user = User::find($id);
-        if ($user) {
-            $user->removeRole($data['role_id']);
-            return new UserResource($user);
-        }
-        return response(['error' => 'Usuário não encontrado.'], 404);
-    }
-
     public function login(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
@@ -95,9 +61,9 @@ class AuthController extends Controller
     public function logout()
     {
         /** @var User $user */
-        $user = Auth()->user();
-        $user->tokens()->delete();
+        //$user = Auth()->user();
+        //$user->tokens()->delete();
 
-        return response(['message' => 'Logout realizado com sucesso.'], 200);
+        //return response(['message' => 'Logout realizado com sucesso.'], 200);
     }
 }

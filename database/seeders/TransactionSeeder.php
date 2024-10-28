@@ -11,9 +11,8 @@ class TransactionSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
-        // Cria 100 transações fictícias
         Transaction::factory()->count(100)->create();
     }
 }

@@ -4,64 +4,88 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
-use App\Models\transaction;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+    private ?Transaction $transaction;
+
+    public function __construct(?Transaction $transaction)
+    {
+        $this->transaction = $transaction;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(User $user)
     {
-        return TransactionResource::collection(transaction::all());
+        return TransactionResource::collection(
+            Transaction::where('user_id', $user->id)->get()
+        );
+    }
+    public function store(TransactionRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $data['user_id'] = $user->id;
+
+        $transaction = $this->transaction->create($data);
+
+        return (new TransactionResource($transaction))
+            ->response()
+            ->setStatusCode(201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(User $user, string $id)
     {
-        //
-    }
+        $transaction = $this->transaction
+            ->where('user_id', $user->id)
+            ->findOrFail($id);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Transaction $transaction)
-    {
         return new TransactionResource($transaction);
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(TransactionRequest $request, Transaction $transaction)
+    public function update(TransactionRequest $request, User $user, string $id)
     {
-        $transaction->update($request->validated());
+        $transaction = $this->transaction
+            ->where('user_id', $user->id)
+            ->findOrFail($id);
+
+        $data = $request->validated();
+        $transaction->update($data);
+
         return new TransactionResource($transaction);
     }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(User $user, string $id)
     {
+        $transaction = Transaction::where('user_id', $user->id)->findOrFail($id);
+
         $transaction->delete();
-        return response()->json(null, 204);
+
+        return response()->json([], 204);
+    }
+
+    public function getTransactionsByCategory(User $user, $category)
+    {
+        return TransactionResource::collection(
+            Transaction::where('user_id', $user->id)
+                ->where('category_id', $category)
+                ->get()
+        );
+    }
+
+    public function getTransactionsByAccountType(User $user, $accountType)
+    {
+        return TransactionResource::collection(
+            Transaction::where('user_id', $user->id)
+                ->where('account_type_id', $accountType)
+                ->get()
+        );
     }
 }

@@ -22,10 +22,10 @@ class TransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'account_id' => 'required|exists:accounts,id',
-            'description' => 'required|string|max:255',
-            'type' => 'required|in:income,expense',
-            'amount' => 'required|numeric|min:0.01',
+            'category_id' => 'required|exists:categories,id',
+            'account_type_id' => 'required|exists:account_types,id',
+            'description' => 'required|string',
+            'amount' => 'required|numeric',
             'date' => 'required|date',
         ];
     }
