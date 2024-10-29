@@ -71,21 +71,27 @@ class TransactionController extends Controller
         return response()->json([], 204);
     }
 
-    public function getTransactionsByCategory(User $user, $category)
+    public function getTransactionsByCategory(Request $request, $category)
     {
-        return TransactionResource::collection(
-            Transaction::where('user_id', $user->id)
-                ->where('category_id', $category)
-                ->get()
-        );
+        if ($request->bearerToken()) {
+            $user = auth('sanctum')->user();
+            return TransactionResource::collection(
+                Transaction::where('user_id', $user->id)
+                    ->where('category_id', $category)
+                    ->get()
+            );
+        }
     }
 
-    public function getTransactionsByAccountType(User $user, $accountType)
+    public function getTransactionsByAccountType(Request $request, $accountType)
     {
-        return TransactionResource::collection(
-            Transaction::where('user_id', $user->id)
-                ->where('account_type_id', $accountType)
-                ->get()
-        );
+        if ($request->bearerToken()) {
+            $user = auth('sanctum')->user();
+            return TransactionResource::collection(
+                Transaction::where('user_id', $user->id)
+                    ->where('account_type_id', $accountType)
+                    ->get()
+            );
+        }
     }
 }
