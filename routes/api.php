@@ -16,15 +16,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/validate-token', [AuthController::class, 'validateToken']);
 
     //Route::get('/users', [AuthController::class, 'index']);
+    Route::get('/transactions/balance', [TransactionController::class, 'getBalanceByCategory']);
 
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/account-types', [AccountTypeController::class, 'index']);
 
-    Route::get('/transactions/{user}', [TransactionController::class, 'index']);
-    Route::get('/transactions/user/{user}/category/{category}', [TransactionController::class, 'getTransactionsByCategory']);
-    Route::get('/transactions/user/{user}/account-type/{accountType}', [TransactionController::class, 'getTransactionsByAccountType']);
+    Route::get('/transactions', [TransactionController::class, 'index']);
+    Route::get('/transactions/category/{category}', [TransactionController::class, 'getTransactionsByCategory']);
+    Route::get('/transactions/account-type/{accountType}', [TransactionController::class, 'getTransactionsByAccountType']);
 
-    Route::post('/transactions/user/{user}', [TransactionController::class, 'store']);
-    Route::put('/transactions/user/{user}/transaction/{transaction}', [TransactionController::class, 'update']);
-    Route::delete('/transactions/user/{user}/transaction/{transaction}', [TransactionController::class, 'destroy']);
+    Route::post('/transactions/new', [TransactionController::class, 'store']);
+    Route::put('/transactions/transaction/{transaction}', [TransactionController::class, 'update']);
+    Route::delete('/transactions/transaction/{transaction}', [TransactionController::class, 'destroy']);
 });

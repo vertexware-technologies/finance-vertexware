@@ -94,4 +94,23 @@ class TransactionController extends Controller
             );
         }
     }
+    public function getBalanceByCategory(Request $request)
+    {
+        if ($request->bearerToken()) {
+            $user = auth('sanctum')->user();
+            $transactions = Transaction::where('user_id', $user->id)->get();
+            $total = 0;
+            foreach ($transactions as $transaction) {
+                if ($transaction->category_id == 1) { // Receita
+                    $total += $transaction->amount;
+                } elseif ($transaction->category_id == 2) { // Despesa
+                    $total -= $transaction->amount;
+                }
+            }
+
+            return response()->json(['balance' => $total], 200);
+        }
+
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
 }
