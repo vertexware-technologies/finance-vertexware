@@ -31,20 +31,11 @@ new class extends Component {
                 <div class="flex justify-center">
                     <ul class="text-[#C3C3D1] flex items-center gap-4 text-[14px]">
                         <x-nav-link class="hover:underline cursor-pointer">
-                            <a>RESUMO</a>
+                            <a>DASHBOARD</a>
                         </x-nav-link>
                         <x-nav-link class="hover:underline cursor-pointer">
-                            <a>DOCUMENTAÇÃO DA API</a>
+                            <a>Transactions</a>
                         </x-nav-link>
-                        <x-nav-link class="hover:underline cursor-pointer">
-                            <a>CONHEÇA NOSSA EQUIPE</a>
-                        </x-nav-link>
-                        <x-nav-link class="hover:underline cursor-pointer">
-                            <a>NOSSOS PLANOS</a>
-                        </x-nav-link>
-                        <x-button.primary class="px-4 ml-8 py-2 bg-[#EB8248] text-white rounded hover:bg-[#726ab4]">
-                            NOVA TRANSAÇÃO
-                        </x-button.primary>
                     </ul>
                 </div>
 
