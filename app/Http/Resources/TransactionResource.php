@@ -21,6 +21,7 @@ class TransactionResource extends JsonResource
             'date' => $this->date,
             'category' => new CategoryResource($this->category),
             'account_type' => new AccountTypeResource($this->accountType),
+            'payment_method' => $this->payment_method->value,
         ];
     }
 }

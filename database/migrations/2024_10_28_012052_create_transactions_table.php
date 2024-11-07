@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('account_type_id')->constrained()->onDelete('cascade');
             $table->text('description');
+            $table->string('payment_method')->default('pix');
             $table->decimal('amount', 10, 2);
             $table->date('date');
             $table->timestamps();

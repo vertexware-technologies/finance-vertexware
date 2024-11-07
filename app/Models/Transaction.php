@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enum\PaymentMethod;
 
 class Transaction extends Model
 {
@@ -15,7 +16,12 @@ class Transaction extends Model
         'account_type_id',
         'description',
         'amount',
-        'date'
+        'date',
+        'payment_method',
+    ];
+
+    protected $casts = [
+        'payment_method' => PaymentMethod::class,
     ];
 
     public function user()

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\PaymentMethod;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class TransactionRequest extends FormRequest
 {
@@ -27,6 +29,7 @@ class TransactionRequest extends FormRequest
             'description' => 'required|string',
             'amount' => 'required|numeric',
             'date' => 'required|date',
+            'payment_method' => ['required', new Enum(PaymentMethod::class)],
         ];
     }
 }
