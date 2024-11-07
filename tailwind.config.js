@@ -8,7 +8,10 @@ export default {
         extend: {
             font: {
                 sans: ['Segoe UI', 'sans-serif'],
-            }
+            },
+            colors: {
+                dashboardBg: '#0F0E11',
+            },
         },
     },
     plugins: [],
