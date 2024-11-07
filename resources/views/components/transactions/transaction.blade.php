@@ -1,7 +1,7 @@
 <div class="flex justify-between items-center mb-6">
     <div class="flex items-center">
         <!-- Ícone à esquerda -->
-        <div class="bg-[#333333] p-2 rounded-md mr-4">
+        <div class="bg-[#EB8248] p-2 rounded-md mr-4">
             <x-fab-pix class="w-6 h-6 text-white" />
         </div>
 

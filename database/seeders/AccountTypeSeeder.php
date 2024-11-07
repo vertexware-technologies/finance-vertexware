@@ -14,7 +14,6 @@ class AccountTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('account_types')->insert([
-            ['id' => 1, 'name' => 'Investimento'],
             ['id' => 2, 'name' => 'Conta Corrente'],
             ['id' => 3, 'name' => 'Minha Carteira'],
         ]);

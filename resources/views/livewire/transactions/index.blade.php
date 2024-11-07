@@ -7,8 +7,8 @@
     @endforeach
     <div class="mt-6">
         <button
-            class="bg-[#181826] text-white font-bold tracking-wide uppercase px-8 py-3 rounded-[4px]
-                hover:bg-[#373751] transition duration-300 ease-in-out w-full"
+            class="bg-[#EB8248] text-white font-bold rounded-full tracking-wide uppercase px-8 py-3 rounded-[4px]
+                hover:bg-[#7067B0] transition duration-300 ease-in-out w-full"
             wire:click="loadMore">
             Carregar Mais
         </button>

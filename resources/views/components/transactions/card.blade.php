@@ -1,3 +1,4 @@
 <x-ui.card class="col-span-2 ">
-    Oi
+    <div>
+    </div>
 </x-ui.card>

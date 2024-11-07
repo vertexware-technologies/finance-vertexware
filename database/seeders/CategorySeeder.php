@@ -16,6 +16,7 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             ['id' => 1, 'name' => 'Despesa'],
             ['id' => 2, 'name' => 'Receita'],
+            ['id' => 3, 'name' => 'Investimento'],
         ]);
     }
 }

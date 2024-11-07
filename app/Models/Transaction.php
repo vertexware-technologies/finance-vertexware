@@ -32,4 +32,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(AccountType::class);
     }
+    public static function getUserBalance($user_id)
+    {
+        return Transaction::where('user_id', $user_id)->sum('amount');
+    }
 }

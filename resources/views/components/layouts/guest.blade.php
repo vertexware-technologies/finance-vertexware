@@ -64,7 +64,7 @@
         {{ $script }}
     @endisset
 
-    @livewireScriptConfig 
+    @livewireScriptConfig
 
 </body>
 
