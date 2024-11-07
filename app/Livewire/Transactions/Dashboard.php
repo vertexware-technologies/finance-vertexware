@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Transactions;
 
+use App\Enum\PaymentMethod;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
