@@ -9,6 +9,19 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public bool $modal = false;
+
+    protected $listeners = ['openModal' => 'showModal'];
+
+    public function showModal()
+    {
+        $this->modal = true;
+    }
+
+    public function CloseModal()
+    {
+        $this->modal = false;
+    }
     public function render()
     {
         $user = Auth::user();
