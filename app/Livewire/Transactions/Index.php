@@ -14,7 +14,7 @@ class Index extends Component
         $transactions = Transaction::query()
             ->whereBelongsTo($user)
             ->with(['accountType', 'category'])
-            ->paginate(10);
+            ->paginate(7);
         return view('livewire.transactions.index', compact('transactions'));
     }
 }

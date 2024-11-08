@@ -1,12 +1,11 @@
-<div class=" text-white p-4 rounded-lg flex flex-col space-y-2 items-start"
-    style="border: 1px solid rgba(255, 255, 255, 0.2);">
+<div class=" text-white p-4 rounded-lg flex flex-col space-y-2 items-start border border-[#111827]">
     <!-- Ícone e Título -->
     <div class="flex items-center space-x-2">
         <!-- Ícone (use o ícone apropriado) -->
         <div class="text-xl text-gray-400">
-            <x-fas-piggy-bank class="w-5 h-5" />
+            <x-akar-statistic-up class="w-5 h-5" style="color: green" />
         </div>
-        <span class="text-sm text-gray-400">Receita</span>
+        <span class="text-sm text-green-900">Receita</span>
     </div>
 
     <!-- Valor -->
