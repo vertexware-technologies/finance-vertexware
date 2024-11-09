@@ -8,5 +8,5 @@
             <span class="text-3xl font-semibold">R$ {{ number_format($balance, 2, ',', '.') }}</span>
         </div>
     </div>
-    <x-transactions.modal />
+    <livewire:transactions.transaction-create />
 </div>
