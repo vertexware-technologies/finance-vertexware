@@ -62,8 +62,6 @@ class TransactionCreate extends Component
             'payment_method' => $this->payment_method,
         ]);
 
-        $this->emit('transactionAdded');
-
         $this->reset(['description', 'amount', 'category_id', 'account_type_id', 'payment_method', 'date']);
         $this->modal = false;
 
