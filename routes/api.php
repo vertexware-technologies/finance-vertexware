@@ -25,6 +25,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/transactions/category/{category}', [TransactionController::class, 'getTransactionsByCategory']);
     Route::get('/transactions/account-type/{accountType}', [TransactionController::class, 'getTransactionsByAccountType']);
 
+    Route::get('/transactions/total-balance', [TransactionController::class, 'getTotalBalance']);
+    Route::get('/transactions/total-investments', [TransactionController::class, 'getTotalInvestments']);
+    Route::get('/transactions/total-expenses', [TransactionController::class, 'getTotalExpenses']);
+    Route::get('/transactions/total-income', [TransactionController::class, 'getTotalIncome']);
+
+
     Route::post('/transactions/new', [TransactionController::class, 'store']);
     Route::put('/transactions/transaction/{transaction}', [TransactionController::class, 'update']);
     Route::delete('/transactions/transaction/{transaction}', [TransactionController::class, 'destroy']);

@@ -28,6 +28,7 @@ class TransactionController extends Controller
     }
     public function store(TransactionRequest $request, User $user)
     {
+        $user = Auth::user();
         $data = $request->validated();
         $data['user_id'] = $user->id;
 
@@ -112,5 +113,53 @@ class TransactionController extends Controller
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    public function getTotalBalance(Request $request)
+    {
+        $user_id = Auth::id();
+
+        $soma = Transaction::where('user_id', $user_id)
+            ->where('category_id', 1) // Receita
+            ->sum('amount');
+
+        $subtracao = Transaction::where('user_id', $user_id)
+            ->whereIn('category_id', [2, 3]) // Despesa e Investimento
+            ->sum('amount');
+
+        $saldo = $soma - $subtracao;
+
+        return response()->json(['total_balance' => $saldo], 200);
+    }
+
+
+    public function getTotalInvestments(Request $request)
+    {
+        $user = Auth::user();
+        $totalInvestments = Transaction::where('user_id', $user->id)
+            ->where('category_id', 3)
+            ->sum('amount');
+
+        return response()->json(['total_investments' => $totalInvestments], 200);
+    }
+
+    public function getTotalExpenses(Request $request)
+    {
+        $user = Auth::user();
+        $totalExpenses = Transaction::where('user_id', $user->id)
+            ->where('category_id', 2)
+            ->sum('amount');
+
+        return response()->json(['total_expenses' => $totalExpenses], 200);
+    }
+
+    public function getTotalIncome(Request $request)
+    {
+        $user = Auth::user();
+        $totalIncome = Transaction::where('user_id', $user->id)
+            ->where('category_id', 1)
+            ->sum('amount');
+
+        return response()->json(['total_income' => $totalIncome], 200);
     }
 }
