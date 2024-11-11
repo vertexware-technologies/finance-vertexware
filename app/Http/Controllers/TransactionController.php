@@ -20,8 +20,13 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(User $user)
+    public function index(Request $request)
     {
+        $user = auth('sanctum')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
         return TransactionResource::collection(
             Transaction::where('user_id', $user->id)->get()
         );
