@@ -7,6 +7,7 @@ use App\Models\AccountType;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class TransactionCreate extends Component
@@ -52,19 +53,20 @@ class TransactionCreate extends Component
     {
         $this->validate();
 
-        Transaction::create([
-            'user_id' => Auth::id(),
-            'category_id' => $this->category_id,
-            'account_type_id' => $this->account_type_id,
-            'description' => $this->description,
-            'amount' => $this->amount,
-            'date' => $this->date,
-            'payment_method' => $this->payment_method,
-        ]);
-
+        DB::transaction(function () {
+            $transaction = Transaction::create([
+                'user_id' => Auth::id(),
+                'category_id' => $this->category_id,
+                'account_type_id' => $this->account_type_id,
+                'description' => $this->description,
+                'amount' => $this->amount,
+                'date' => $this->date,
+                'payment_method' => $this->payment_method,
+            ]);
+        });
         $this->reset(['description', 'amount', 'category_id', 'account_type_id', 'payment_method', 'date']);
         $this->modal = false;
 
-        session()->flash('message', 'Transação adicionada com sucesso!');
+        return redirect()->route('dashboard');
     }
 }
