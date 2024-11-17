@@ -9,5 +9,8 @@
             <x-transactions.income :income="$income" />
             <x-transactions.expense :expense="$expense" />
         </div>
+        <div class="grid grid-cols-2 gap-4 mt-3">
+            <x-transactions.category-chart />
+        </div>
     </x-ui.card>
 </div>

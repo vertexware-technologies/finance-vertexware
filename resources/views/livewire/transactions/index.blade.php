@@ -16,8 +16,7 @@
         <div class="mt-6">
             <button
                 class="bg-[#EB8248] text-white font-bold rounded-full tracking-wide uppercase px-8 py-3 rounded-[4px]
-                hover:bg-[#7067B0] transition duration-300 ease-in-out w-full"
-                wire:click="loadMore">
+                hover:bg-[#7067B0] transition duration-300 ease-in-out w-full">
                 Ver Todos
             </button>
         </div>

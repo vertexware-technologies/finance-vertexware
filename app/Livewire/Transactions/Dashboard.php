@@ -38,7 +38,6 @@ class Dashboard extends Component
         $investment = Transaction::where('user_id', $user->id)
             ->where('category_id', 3)
             ->sum('amount');
-
         return view('livewire.transactions.dashboard', compact(['balance', 'income', 'expense', 'investment']));
     }
 }

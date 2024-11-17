@@ -45,7 +45,7 @@
                     <label class="text-[14px] text-[#C3C3D1]">Método de Pagamento</label>
                     <select wire:model="payment_method"
                         class="w-full bg-[#1E1E2C] text-white p-2 rounded-lg border border-[#1E1E2C]">
-                        <option value="">Selecione o método de pagamento</option>
+                        <option value="">Selecione</option>
                         @foreach ($paymentMethods as $method)
                             <option value="{{ $method->value }}">{{ ucfirst(strtolower($method->name)) }}</option>
                         @endforeach
@@ -62,7 +62,7 @@
                     <label class="text-[14px] text-[#C3C3D1]">Categoria</label>
                     <select wire:model="category_id"
                         class="w-full bg-[#1E1E2C] text-white p-2 rounded-lg border border-[#1E1E2C]">
-                        <option value="">Selecione a categoria</option>
+                        <option value="">Selecione</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
@@ -70,18 +70,13 @@
                     @error('category_id')
                         <div class="text-red-600 mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <div class="flex justify-end text-sm">
-                        <a href="#" class="text-[#EB8248] hover:text-[#7067B0] transition duration-300">
-                            + Adicione uma nova categoria
-                        </a>
-                    </div>
                 </div>
 
                 <div class="flex flex-col gap-2 w-1/2">
                     <label class="text-[14px] text-[#C3C3D1]">Tipo de Conta</label>
                     <select wire:model="account_type_id"
                         class="w-full bg-[#1E1E2C] text-white p-2 rounded-lg border border-[#1E1E2C]">
-                        <option value="">Selecione o tipo de conta</option>
+                        <option value="">Selecione</option>
                         @foreach ($accountTypes as $accountType)
                             <option value="{{ $accountType->id }}">{{ $accountType->name }}</option>
                         @endforeach
@@ -89,11 +84,6 @@
                     @error('account_type_id')
                         <div class="text-red-600 mt-1 text-sm">{{ $message }}</div>
                     @enderror
-                    <div class="flex justify-end text-sm">
-                        <a href="#" class="text-[#EB8248] hover:text-[#7067B0] transition duration-300">
-                            + Adicione um novo tipo de conta
-                        </a>
-                    </div>
                 </div>
             </div>
 

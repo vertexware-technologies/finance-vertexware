@@ -14,8 +14,13 @@ class AccountTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('account_types')->insert([
+            ['id' => 1, 'name' => 'Minha Carteira'],
             ['id' => 2, 'name' => 'Conta Corrente'],
-            ['id' => 3, 'name' => 'Minha Carteira'],
+            ['id' => 3, 'name' => 'Conta de investimento'],
+            ['id' => 4, 'name' => 'Conta empresarial'],
+            ['id' => 5, 'name' => 'Cartão de crédito'],
+            ['id' => 6, 'name' => 'Débito automático'],
+            ['id' => 7, 'name' => 'Crédito automático'],
         ]);
     }
 }

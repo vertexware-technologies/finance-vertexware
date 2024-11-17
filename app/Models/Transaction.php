@@ -50,4 +50,34 @@ class Transaction extends Model
         $saldo = $soma - $subtracao;
         return $saldo;
     }
+    public static function getCategoryPercentages($user_id)
+    {
+        $income = Transaction::where('user_id', $user_id)
+            ->where('category_id', 1)
+            ->sum('amount');
+
+        $expense = Transaction::where('user_id', $user_id)
+            ->where('category_id', 2)
+            ->sum('amount');
+
+        $investment = Transaction::where('user_id', $user_id)
+            ->where('category_id', 3)
+            ->sum('amount');
+
+        $total = $income + $expense + $investment;
+
+        if ($total == 0) {
+            return [
+                'income' => 0,
+                'expense' => 0,
+                'investment' => 0,
+            ];
+        }
+
+        return [
+            'income' => round(($income / $total) * 100, 2),
+            'expense' => round(($expense / $total) * 100, 2),
+            'investment' => round(($investment / $total) * 100, 2),
+        ];
+    }
 }

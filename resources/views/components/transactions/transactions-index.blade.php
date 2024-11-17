@@ -46,18 +46,11 @@
                     <td class="px-6 py-4 text-sm font-medium text-white">
                         {{ \Carbon\Carbon::parse($transaction->date)->format('d/m/Y') }}
                     </td>
-                    <td class="px-6 py-4 text-sm font-medium text-white">
-
-                        <button wire:click="edit({{ $transaction->id }})" class="h-4 w-4 mr-2 focus:outline-none">
-                            <x-fas-edit class="text-white" />
-                        </button>
-
-
-                        <button wire:click="edit({{ $transaction->id }})" class="h-4 w-4 focus:outline-none">
-                            <x-gmdi-delete class="text-red-500" />
-                        </button>
-
+                    <td class="pl-8 py-4 text-sm font-medium text-white flex items-center space-x-4">
+                        <livewire:transactions.button-transaction-update :transaction="$transaction" />
+                        <livewire:transactions.button-transaction-delete :transaction="$transaction" />
                     </td>
+
                 </tr>
             @empty
                 <tr>
