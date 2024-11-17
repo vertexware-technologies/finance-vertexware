@@ -11,6 +11,7 @@
         </div>
         <div class="grid grid-cols-2 gap-4 mt-3">
             <x-transactions.category-chart />
+            <x-transactions.account-type-chart />
         </div>
     </x-ui.card>
 </div>

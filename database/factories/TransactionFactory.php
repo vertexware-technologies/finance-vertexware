@@ -30,7 +30,7 @@ class TransactionFactory extends Factory
             'payment_method' => fake()->randomElement([
                 PaymentMethod::PIX->value,
                 PaymentMethod::BOLETO->value,
-                PaymentMethod::CARD->value,
+                PaymentMethod::CARTAO->value,
             ]),
         ];
     }

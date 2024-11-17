@@ -15,7 +15,7 @@
 
         <!-- Detalhes da transação -->
         <div>
-            <div class="text-white text-xs">
+            <div class="text-white text-[15px]">
                 {{ $transaction->accountType->name }}
             </div>
             <div class="text-gray-400 text-sm">
@@ -25,11 +25,11 @@
     </div>
 
     <!-- Valor da transação -->
-    @if ($transaction->account_type_id == 1)
+    @if ($transaction->category_id == 1)
         <div class="text-green-500 text-[15px] tracking-wide truncate">
             R$ {{ number_format($transaction->amount, 2, ',', '.') }}
         </div>
-    @elseif ($transaction->account_type_id == 2)
+    @elseif ($transaction->category_id == 2)
         <div class="text-red-500 text-[15px] tracking-wide truncate">
             - R$ {{ number_format($transaction->amount, 2, ',', '.') }}
         </div>

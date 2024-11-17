@@ -80,4 +80,22 @@ class Transaction extends Model
             'investment' => round(($investment / $total) * 100, 2),
         ];
     }
+    public static function getAccountTypePercentages($user_id)
+    {
+        $accountTypes = AccountType::pluck('name', 'id')->toArray(); // Pega todos os tipos de conta
+        $transactions = Transaction::where('user_id', $user_id)
+            ->selectRaw('account_type_id, SUM(amount) as total')
+            ->groupBy('account_type_id')
+            ->pluck('total', 'account_type_id')
+            ->toArray();
+
+        $totalAmount = array_sum($transactions);
+        $percentages = array_fill_keys(array_keys($accountTypes), 0);
+        foreach ($transactions as $accountTypeId => $amount) {
+            if ($totalAmount > 0) {
+                $percentages[$accountTypeId] = round(($amount / $totalAmount) * 100, 2);
+            }
+        }
+        return $percentages;
+    }
 }
