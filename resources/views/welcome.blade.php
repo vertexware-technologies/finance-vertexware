@@ -158,8 +158,8 @@
             </a>
         </div>
         <div class="menu">
-            <a href="{{ route('login') }}" class="login">Login</a>
-            <a href="{{ route('register') }}" class="register">Register</a>
+            <a href="{{ route('login') }}" class="login">Entrar</a>
+            <a href="{{ route('register') }}" class="register">Registrar-se</a>
         </div>
     </div>
     <div class="content-container">

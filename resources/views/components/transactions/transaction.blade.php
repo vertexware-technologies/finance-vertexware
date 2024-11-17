@@ -15,7 +15,7 @@
 
         <!-- Detalhes da transação -->
         <div>
-            <div class="text-white text-lg text-[17px]">
+            <div class="text-white text-xs">
                 {{ $transaction->accountType->name }}
             </div>
             <div class="text-gray-400 text-sm">
