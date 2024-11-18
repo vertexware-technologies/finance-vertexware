@@ -1,7 +1,7 @@
 <div>
     <!-- Botão de exclusão -->
     <button wire:click="confirmDelete({{ $transaction->id }})" class="h-4 w-4 focus:outline-none">
-        <x-eos-delete class="text-red-500" />
+        @svg('eos-delete', ['style' => 'color: red;'])
     </button>
 
     <!-- Modal de confirmação -->
