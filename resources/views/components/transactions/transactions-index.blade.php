@@ -54,7 +54,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="2" class="px-6 col-span-5 py-4 text-sm text-center text-gray-400">
+                    <td colspan="5" class="px-6 py-4 text-sm text-center text-gray-400">
                         Nenhuma transação encontrada.
                     </td>
                 </tr>
