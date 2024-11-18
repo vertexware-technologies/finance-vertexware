@@ -41,7 +41,7 @@
                     </td>
 
                     @if ($transaction->category_id == 1)
-                        <td class="px-6 py-4 text-sm text-green-800">
+                        <td class="px-6 py-4 text-sm text-green-500">
                             R$ {{ number_format($transaction->amount, 2, ',', '.') }}
                         </td>
                     @elseif ($transaction->category_id == 2)
