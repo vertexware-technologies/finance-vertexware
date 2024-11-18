@@ -6,7 +6,7 @@
                 <x-fab-pix class="w-6 h-6 text-white" />
             @elseif ($transaction->payment_method == App\Enum\PaymentMethod::BOLETO)
                 <x-bxs-barcode class="w-6 h-6 text-white" />
-            @elseif ($transaction->payment_method == App\Enum\PaymentMethod::CARD)
+            @elseif ($transaction->payment_method == App\Enum\PaymentMethod::CARTAO)
                 <x-ionicon-card class="w-6 h-6 text-white" />
             @else
                 <x-fas-money-bill-alt class="w-6 h-6 text-white" />

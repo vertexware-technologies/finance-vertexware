@@ -22,10 +22,26 @@
             @forelse ($transactions as $transaction)
                 <tr>
                     <td class="px-6 py-4 text-sm font-medium text-white">
-                        {{ $transaction->category->name }}
+                        @if ($transaction->category_id == 1)
+                            <div class="flex items-center space-x-2 text-green-500 text-[15px] tracking-wide truncate">
+                                <x-akar-statistic-up class="w-4 h-4" style="color: green" />
+                                <span>{{ $transaction->category->name }}</span>
+                            </div>
+                        @elseif ($transaction->category_id == 2)
+                            <div class="flex items-center space-x-2 text-red-500 text-[15px] tracking-wide truncate">
+                                <x-akar-statistic-down class="w-4 h-4" style="color: red" />
+                                <span>{{ $transaction->category->name }}</span>
+                            </div>
+                        @else
+                            <div class="flex items-center space-x-2 text-white text-[15px] tracking-wide truncate">
+                                <x-fas-piggy-bank class="w-4 h-4" />
+                                <span>{{ $transaction->category->name }}</span>
+                            </div>
+                        @endif
                     </td>
+
                     @if ($transaction->category_id == 1)
-                        <td class="px-6 py-4 text-sm text-green-500">
+                        <td class="px-6 py-4 text-sm text-green-800">
                             R$ {{ number_format($transaction->amount, 2, ',', '.') }}
                         </td>
                     @elseif ($transaction->category_id == 2)
@@ -38,11 +54,31 @@
                         </td>
                     @endif
                     <td class="px-6 py-4 text-sm font-medium text-white">
+
                         {{ $transaction->accountType->name }}
                     </td>
                     <td class="px-6 py-4 text-sm font-medium text-white">
-                        {{ $transaction->payment_method->name }}
+                        <div class="flex items-center space-x-2">
+                            @if ($transaction->payment_method == App\Enum\PaymentMethod::PIX)
+                                <x-fab-pix class="w-4 h-4"
+                                    style="color: {{ $transaction->category_id == 1 ? 'green' : ($transaction->category_id == 2 ? 'red' : 'white') }}" />
+                            @elseif ($transaction->payment_method == App\Enum\PaymentMethod::BOLETO)
+                                <x-bxs-barcode class="w-4 h-4"
+                                    style="color: {{ $transaction->category_id == 1 ? 'green' : ($transaction->category_id == 2 ? 'red' : 'white') }}" />
+                            @elseif ($transaction->payment_method == App\Enum\PaymentMethod::CARTAO)
+                                <x-ionicon-card class="w-4 h-4"
+                                    style="color: {{ $transaction->category_id == 1 ? 'green' : ($transaction->category_id == 2 ? 'red' : 'white') }}" />
+                            @else
+                                <x-fas-money-bill-alt class="w-4 h-4"
+                                    style="color: {{ $transaction->category_id == 1 ? 'green' : ($transaction->category_id == 2 ? 'red' : 'white') }}" />
+                            @endif
+                            <span
+                                class="{{ $transaction->category_id == 1 ? 'text-green-500' : ($transaction->category_id == 2 ? 'text-red-500' : 'text-white') }}">
+                                {{ $transaction->payment_method->name }}
+                            </span>
+                        </div>
                     </td>
+
                     <td class="px-6 py-4 text-sm font-medium text-white">
                         {{ \Carbon\Carbon::parse($transaction->date)->format('d/m/Y') }}
                     </td>

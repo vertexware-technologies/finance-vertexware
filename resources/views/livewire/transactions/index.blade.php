@@ -1,6 +1,6 @@
 <x-ui.card>
     <div class="flex items-center mb-6">
-        <p class="text-white text-[30px]">Transações</p>
+        <p class="text-white text-[30px]">Últimas Transações</p>
     </div>
 
     @if ($transactions->isEmpty())

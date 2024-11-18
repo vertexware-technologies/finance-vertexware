@@ -32,10 +32,10 @@ class ButtonTransactionDelete extends Component
     }
 
     // Método para resetar o modal e a transação
-    private function resetModal()
+    public function resetModal()
     {
-        $this->transactionToDelete = null;
         $this->modal = false;
+        redirect(route('transactions'));
     }
 
     // Renders the view

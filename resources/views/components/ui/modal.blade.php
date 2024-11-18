@@ -12,7 +12,7 @@
                 <div class="text-[28px] text-white font-semibold">
                     {{ $title }}
                 </div>
-                <div class="text-[16px] text-[#C3C3D1]">
+                <div class="mt-2 text-[16px] text-[#C3C3D1]">
                     {{ $subtitle }}
                 </div>
             </div>

@@ -81,6 +81,8 @@ class ButtonTransactionUpdate extends Component
 
         return redirect()->route('transactions');
     }
+
+
     public function render()
     {
         return view('livewire.transactions.button-transaction-update');
