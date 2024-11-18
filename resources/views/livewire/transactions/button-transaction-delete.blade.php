@@ -1,7 +1,7 @@
 <div>
     <!-- Botão de exclusão -->
     <button wire:click="confirmDelete({{ $transaction->id }})" class="h-4 w-4 focus:outline-none">
-        <x-gmdi-delete class="text-red-500" />
+        <x-eos-delete class="text-red-500" />
     </button>
 
     <!-- Modal de confirmação -->
