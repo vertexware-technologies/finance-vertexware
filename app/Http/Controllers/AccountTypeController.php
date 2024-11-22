@@ -8,7 +8,7 @@ use App\Models\AccountType;
 
 class AccountTypeController extends Controller
 {
-    private ?AccountType $account_type;
+    private AccountType $account_type;
     public function __construct(AccountType $account_type)
     {
         $this->account_type = $account_type;

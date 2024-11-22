@@ -6,6 +6,7 @@ use App\Http\Requests\TransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,27 +23,43 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth('sanctum')->user();
-        if (!$user) {
+        if ($request->bearerToken()) {
+            $user = auth('sanctum')->user();
+
+            return TransactionResource::collection(
+                Transaction::where('user_id', $user->id)->get()
+            );
+        }
+    }
+    public function store(TransactionRequest $request): JsonResponse
+    {
+        if (!$request->bearerToken()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return TransactionResource::collection(
-            Transaction::where('user_id', $user->id)->get()
-        );
-    }
-    public function store(TransactionRequest $request, User $user)
-    {
-        $user = Auth::user();
+        // Obter o usuário autenticado
+        $user = Auth::guard('sanctum')->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
         $data = $request->validated();
-        $data['user_id'] = $user->id;
-
-        $transaction = $this->transaction->create($data);
-
+        $transaction = Transaction::create([
+            'user_id' => $user->id,
+            'category_id' => $data['category_id'],
+            'account_type_id' => $data['account_type_id'],
+            'description' => $data['description'],
+            'amount' => $data['amount'],
+            'date' => $data['date'],
+            'payment_method' => $data['payment_method'],
+        ]);
         return (new TransactionResource($transaction))
             ->response()
             ->setStatusCode(201);
     }
+
+
+
 
     public function show(User $user, string $id)
     {

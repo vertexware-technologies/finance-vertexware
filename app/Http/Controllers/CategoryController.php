@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    private ?Category $category;
+    private Category $category;
 
-    public function __construct(?Category $category)
+    public function __construct(Category $category)
     {
         $this->category = $category;
     }
