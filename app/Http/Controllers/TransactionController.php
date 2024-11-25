@@ -36,8 +36,6 @@ class TransactionController extends Controller
         if (!$request->bearerToken()) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        // Obter o usuário autenticado
         $user = Auth::guard('sanctum')->user();
 
         if (!$user) {
@@ -85,14 +83,25 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user, string $id)
+    public function destroy(Request $request, Transaction $transaction)
     {
-        $transaction = Transaction::where('user_id', $user->id)->findOrFail($id);
+        // Verificar se o token de autenticação está presente
+        if (!$request->bearerToken()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
+        // Obter o usuário autenticado com o guard Sanctum
+        $user = Auth::guard('sanctum')->user();
+
+        // Verificar se a transação pertence ao usuário autenticado
+        if ($transaction->user_id !== $user->id) {
+            return response()->json(['message' => 'Transação não encontrada para este usuário'], 404);
+        }
         $transaction->delete();
-
         return response()->json([], 204);
     }
+
+
 
     public function getTransactionsByCategory(Request $request, $category)
     {
