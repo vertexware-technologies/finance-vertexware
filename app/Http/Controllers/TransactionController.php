@@ -83,27 +83,12 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Transaction $transaction)
+    public function destroy($id)
     {
-        // Verificar se o token de autenticação está presente
-        if (!$request->bearerToken()) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        // Obter o usuário autenticado
-        $user = Auth::guard('sanctum')->user();
-
-        // Verificar se a transação pertence ao usuário autenticado
-        if ($transaction->user_id !== $user->id) {
-            return response()->json(['message' => 'Transação não encontrada para este usuário'], 404);
-        }
-
-        // Excluir a transação
-        $transaction->delete();
-
-        // Retornar resposta vazia com status 204 (No Content)
-        return response()->json([], 204);
+        Transaction::destroy($id);
+        return response()->json(null, 204);
     }
+
 
 
 
