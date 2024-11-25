@@ -83,16 +83,13 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Transaction::destroy($id);
-        return response()->json(null, 204);
+        if ($request->bearerToken()) {
+            Transaction::destroy($id);
+            return response()->json(null, 204);
+        }
     }
-
-
-
-
-
     public function getTransactionsByCategory(Request $request, $category)
     {
         if ($request->bearerToken()) {
