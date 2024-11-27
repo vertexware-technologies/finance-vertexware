@@ -95,13 +95,20 @@ class TransactionController extends Controller
     {
         if ($request->bearerToken()) {
             $user = auth('sanctum')->user();
-            return TransactionResource::collection(
-                Transaction::where('user_id', $user->id)
-                    ->where('category_id', $category)
-                    ->get()
-            );
+
+            // Retorna apenas as 3 transações mais recentes da categoria
+            $transactions = Transaction::where('user_id', $user->id)
+                ->where('category_id', $category)
+                ->latest('created_at') // Ordena pelas mais recentes
+                ->take(3) // Limita a 3 transações
+                ->get();
+
+            return TransactionResource::collection($transactions);
         }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
+
 
     public function getTransactionsByAccountType(Request $request, $accountType)
     {
@@ -110,10 +117,13 @@ class TransactionController extends Controller
             return TransactionResource::collection(
                 Transaction::where('user_id', $user->id)
                     ->where('account_type_id', $accountType)
+                    ->latest() // Ordena pela transação mais recente
+                    ->take(3)  // Limita a 3 transações
                     ->get()
             );
         }
     }
+
     public function getBalanceByCategory(Request $request)
     {
         if ($request->bearerToken()) {
