@@ -28,7 +28,8 @@
             max-width: 1200px;
             padding: 10px 20px;
             position: fixed;
-            top: 0;
+            top: 20px;
+            /* Ajuste feito aqui */
             background-color: #111827;
             z-index: 1000;
         }
@@ -143,6 +144,7 @@
             }
         }
     </style>
+
 </head>
 
 <body>
