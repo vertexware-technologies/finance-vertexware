@@ -68,17 +68,18 @@ class TransactionController extends Controller
         return new TransactionResource($transaction);
     }
 
-    public function update(TransactionRequest $request, User $user, string $id)
+    public function update(TransactionRequest $request, string $id)
     {
-        $transaction = $this->transaction
-            ->where('user_id', $user->id)
+        $transaction = Transaction::where('user_id', Auth::id())
             ->findOrFail($id);
-
         $data = $request->validated();
         $transaction->update($data);
-
-        return new TransactionResource($transaction);
+        return response()->json([
+            'message' => 'Transação atualizada com sucesso!',
+            'transaction' => new TransactionResource($transaction)
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.
