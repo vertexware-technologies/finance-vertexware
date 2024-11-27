@@ -177,7 +177,8 @@
     <div class="angled-background"></div>
 
     <!-- Link para baixar o app em dispositivos móveis -->
-    <a href="https://finance.siriusworks.com.br/app-release.apk" class="download-link" style="display: none;">
+    <a style="color: #EB8248" href="https://finance.siriusworks.com.br/app-release.apk" class="download-link"
+        style="display: none;">
         Baixe o nosso app agora!
     </a>
 
