@@ -28,7 +28,7 @@
             max-width: 1200px;
             padding: 10px 20px;
             position: fixed;
-            top: 70px;
+            top: 0;
             background-color: #111827;
             z-index: 1000;
         }
@@ -81,26 +81,29 @@
             z-index: 10;
             padding: 0 20px;
             box-sizing: border-box;
+            margin-top: 80px;
+            /* Ajuste para o header */
         }
 
         .text-content {
-            flex-basis: 30%;
+            flex-basis: 40%;
             max-width: 500px;
         }
 
         .image-placeholder {
-            flex-basis: 70%;
-            height: 400px;
+            flex-basis: 55%;
+            height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 0;
         }
 
         .image-placeholder img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-height: 600px;
+            /* Limita a altura sem cortar */
+            object-fit: contain;
+            /* Garante que a imagem não seja cortada */
             border-radius: 8px;
         }
 
@@ -116,35 +119,27 @@
             z-index: 0;
         }
 
-        /* Condição para dispositivos móveis */
+        /* Responsividade */
         @media (max-width: 768px) {
-            .download-link {
-                display: block;
-                background-color: #EB8248;
-                color: #fff;
-                padding: 10px 20px;
-                text-align: center;
-                border-radius: 5px;
-                margin-top: 20px;
-                text-decoration: none;
-                font-size: 1.2rem;
-            }
-
             .content-container {
                 display: block;
-                /* Altera o layout para empilhar os itens no celular */
+                text-align: center;
                 padding: 20px;
             }
 
-            .text-content,
-            .image-placeholder {
+            .text-content {
                 flex-basis: 100%;
-                max-width: 100%;
                 margin-bottom: 20px;
             }
 
+            .image-placeholder {
+                flex-basis: 100%;
+            }
+
             .image-placeholder img {
-                height: 300px;
+                width: 90%;
+                /* Ajusta a largura para telas menores */
+                max-height: 400px;
             }
         }
     </style>
@@ -172,7 +167,7 @@
             </p>
         </div>
         <div class="image-placeholder">
-            <img src="{{ asset('images/design-pronto.png') }}" alt="Desenvolvido por Bruno">
+            <img src="{{ asset('images/design-pronto.png') }}" alt="Em Desenvolvimento">
         </div>
     </div>
 
