@@ -172,7 +172,7 @@
             </p>
         </div>
         <div class="image-placeholder">
-            <img src="{{ asset('images/em-desenvolvimento.png') }}" alt="Em Desenvolvimento">
+            <img src="{{ asset('images/design-pronto.png') }}" alt="Desenvolvido por Bruno">
         </div>
     </div>
 
